@@ -1,4 +1,8 @@
 SvnFilter::Application.routes.draw do
+  resources :repos
+
+
+  root :to => 'repos#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
