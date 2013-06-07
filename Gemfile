@@ -21,6 +21,7 @@ group :test do
 	gem 'rb-inotify'
 	gem 'guard-spork'
 	gem 'spork'
+	gem 'fuubar'
 end
 
 group :development do 
