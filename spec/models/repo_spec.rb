@@ -1,5 +1,32 @@
 require 'spec_helper'
 
 describe Repo do
-  pending "add some examples to (or delete) #{__FILE__}"
+	context 'with valid model' do
+		let(:repo) { create(:repo) }
+		it { expect(repo).to be_valid }
+
+		it "must allow any of the valid protocols" do
+			["svn", "http", "https", "svn+ssh"].each do |p|
+				expect(build(:repo, protocol: p)).to be_valid
+			end
+		end
+	end
+
+	context 'with invalid model' do
+		let(:empty_repo) { Repo.build }
+		it { expect(:empty_repo).to have_at_least(1).errors_on(:name) }
+		it { expect(:empty_repo).to have_at_least(1).errors_on(:protocol) }
+		it { expect(:empty_repo).to have_at_least(1).errors_on(:url) }
+
+		it "must have unique name" do
+			myrepo = create(:repo)
+			expect(build(:repo, name: myrepo.name)).to have(1).errors_on(:name)
+		end
+
+		it "only allows an alphanumeric name" do
+			expect(build(:repo, name: "Invalid Name")).to have(1).errors_on(:name)
+		end
+
+	end
+
 end

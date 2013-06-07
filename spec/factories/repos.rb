@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :repo do
-    name "MyString"
-    protocol "MyString"
-    url "MyString"
+    sequence(:name) { |n| "MyRepo#{n}" }
+    protocol "svn"
+    url "svntest.foxienet.com/traceper"
   end
 end
