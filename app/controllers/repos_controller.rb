@@ -1,8 +1,10 @@
 class ReposController < ApplicationController
+  layout "front", only: [:index]
   # GET /repos
   # GET /repos.json
   def index
     @repos = Repo.all
+    @repo = Repo.new
 
     respond_to do |format|
       format.html # index.html.erb

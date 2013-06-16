@@ -1,27 +1,31 @@
-<h1>Listing repos</h1>
+<div class="row-fluid">
+  <div class="span6 offset3" style="background-color: #fff">
+    <h1>Listing repos</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Protocol</th>
-    <th>Url</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Protocol</th>
+        <th>Url</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
 
-<% @repos.each do |repo| %>
-  <tr>
-    <td><%= repo.name %></td>
-    <td><%= repo.protocol %></td>
-    <td><%= repo.url %></td>
-    <td><%= link_to 'Show', repo %></td>
-    <td><%= link_to 'Edit', edit_repo_path(repo) %></td>
-    <td><%= link_to 'Destroy', repo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+    <% @repos.each do |repo| %>
+      <tr>
+        <td><%= repo.name %></td>
+        <td><%= repo.protocol %></td>
+        <td><%= repo.url %></td>
+        <td><%= link_to 'Show', repo %></td>
+        <td><%= link_to 'Edit', edit_repo_path(repo) %></td>
+        <td><%= link_to 'Destroy', repo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+    </table>
 
-<br />
+    <br />
 
-<%= link_to 'New Repo', new_repo_path %>
+    <%= link_to 'New Repo', new_repo_path %>
+  </div>
+</div>
