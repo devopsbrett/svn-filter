@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130607083105) do
+ActiveRecord::Schema.define(:version => 20130616204527) do
+
+  create_table "local_repos", :force => true do |t|
+    t.integer  "repo_id"
+    t.string   "path"
+    t.integer  "status"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "local_repos", ["repo_id"], :name => "index_local_repos_on_repo_id"
 
   create_table "repos", :force => true do |t|
     t.string   "name"
