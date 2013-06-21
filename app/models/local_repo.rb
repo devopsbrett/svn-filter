@@ -1,5 +1,5 @@
 class LocalRepo < ActiveRecord::Base
-  belongs_to :repo
+  belongs_to :repo, inverse_of: :local
   validates :repo, presence: true
   validates :path, presence: true, uniqueness: true
   validates :status, presence: true, numericality: { only_integer: true }
