@@ -1,17 +1,21 @@
 class Repo < ActiveRecord::Base
-  has_one :local_repo
+  has_one :local, class_name: "LocalRepo", inverse_of: :repo
   validates :url, presence: true
   validate :has_valid_protocol
   validates :name, presence: true, uniqueness: true, format: { with: /^[a-zA-Z0-9]*$/ }
-  attr_accessible :name, :protocol, :url
+  validates_associated :local
+  attr_accessible :name, :protocol, :url, :local_attributes
+  accepts_nested_attributes_for :local, allow_destroy: true
 
-  def self.valid_protocols
-    %w(svn http https svn+ssh)
+  VALID_PROTOCOLS = %w(svn http https svn+ssh)
+
+  def has_local?
+    !local.nil?
   end
-
+  
   def has_valid_protocol
-    unless self.class.valid_protocols.include?(protocol)
-      errors.add(:protocol, "must be one of #{self.class.valid_protocols.join(', ')}")
+    unless VALID_PROTOCOLS.include?(protocol)
+      errors.add(:protocol, "must be one of #{VALID_PROTOCOLS.join(', ')}")
     end
   end
 end

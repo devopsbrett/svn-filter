@@ -16,11 +16,11 @@ describe "An external", Repo do
 	end
 
 	context 'when empty' do
-		let(:empty_repo) { Repo.build }
+		let(:empty_repo) { Repo.new }
 
-		it { expect(:empty_repo).to have_at_least(1).errors_on(:name) }
-		it { expect(:empty_repo).to have_at_least(1).errors_on(:protocol) }
-		it { expect(:empty_repo).to have_at_least(1).errors_on(:url) }
+		it { expect(empty_repo).to have_at_least(1).errors_on(:name) }
+		it { expect(empty_repo).to have_at_least(1).errors_on(:protocol) }
+		it { expect(empty_repo).to have_at_least(1).errors_on(:url) }
 	end
 
 	context 'with valid data' do
@@ -33,5 +33,23 @@ describe "An external", Repo do
 			end
 		end
 	end
+
+	describe '#has_local?' do
+        context 'with local repo' do
+            let(:repo) { create(:repo_with_local) }
+
+            it 'should return true' do
+                expect(repo.has_local?).to be_true
+            end
+        end
+
+        context 'without local repo' do
+            let(:repo) { create(:repo) }
+
+            it 'should return false' do
+                expect(repo.has_local?).to be_false
+            end
+        end
+    end
 
 end
