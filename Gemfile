@@ -22,6 +22,10 @@ group :test do
 	gem 'guard-spork'
 	gem 'spork'
 	gem 'fuubar'
+	gem 'sqlite3'
+	gem 'metric_fu'
+	gem 'simplecov'
+	gem 'simplecov-rcov-text'
 end
 
 group :development do 
