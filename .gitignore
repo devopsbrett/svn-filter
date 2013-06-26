@@ -15,5 +15,7 @@
 /tmp
 
 /coverage
+/data
+/spec/data
 
 /config/database.yml
