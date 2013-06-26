@@ -51,6 +51,10 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'sidekiq'
+
+gem 'sinatra', require: false
+gem 'slim'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
