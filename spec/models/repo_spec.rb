@@ -52,4 +52,12 @@ describe "An external", Repo do
         end
     end
 
+    describe '#full_url' do
+    	let(:repo) { build(:repo, protocol: 'https') }
+
+    	it 'should return the url including protocol' do
+    		expect(repo.full_url).to eq("https://#{repo.url}")
+    	end
+    end
+
 end

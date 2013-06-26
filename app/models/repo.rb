@@ -9,8 +9,16 @@ class Repo < ActiveRecord::Base
 
   VALID_PROTOCOLS = %w(svn http https svn+ssh)
 
+  def to_param
+    "#{id}-#{name}".parameterize
+  end
+
   def has_local?
     !local.nil?
+  end
+
+  def full_url
+    "#{protocol}://#{url}"
   end
   
   def has_valid_protocol
