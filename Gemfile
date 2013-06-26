@@ -21,6 +21,11 @@ group :test do
 	gem 'rb-inotify'
 	gem 'guard-spork'
 	gem 'spork'
+	gem 'fuubar'
+	gem 'sqlite3'
+	gem 'metric_fu'
+	gem 'simplecov'
+	gem 'simplecov-rcov-text'
 end
 
 group :development do 
@@ -46,6 +51,10 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'sidekiq'
+
+gem 'sinatra', require: false
+gem 'slim'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
