@@ -1,4 +1,4 @@
-<%= form_for(@repo) do |f| %>
+<%= form_for @repo, html: { class: "form-inline" } do |f| %>
   <% if @repo.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@repo.errors.count, "error") %> prohibited this repo from being saved:</h2>
@@ -12,18 +12,44 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+    <div class="repo-path width-80 margin-center field-dark">
+      <div class="select-hide-arrow">
+        <%= f.label :protocol %>
+        <%= f.select :protocol, Repo::VALID_PROTOCOLS, {}, { class: 'auto-width' } %>
+      </div>://<%= f.label :url %>
+      <%= f.text_field :url, { placeholder: "Tester", style: "width: inherit;" } %>
+    </div>
   </div>
   <div class="field">
-    <%= f.label :protocol %><br />
-    <%= f.text_field :protocol %>
+    <div class="width-80 margin-center multi-fields">
+      <div class="field-dark push-right right-field cbox-field" style="position: relative;">
+        <%= label_tag 'has_local', "Mirror repo locally" %>
+        <%= check_box_tag 'has_local', 1, @repo.has_local?, { data: {field: 'local_repo', prefix: 'repo_local_attributes_'}, class: 'toggle-nested' } %>
+        <a href='#' class="icon-question-sign no-decorate help-tip" data-toggle="popover" data-title="Creating A Mirror" data-content="Working with remote repos can be slow. Select this box to create a local mirror, this will take longer to create but additional actions will be quicker."></a>
+      </div>
+
+      <div class="field-dark no-label left-field tbox-field" style="width: 55%">
+        <%= f.label :name %>
+        <%= f.text_field :name, { placeholder: "Name this connection" } %>
+      </div>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :url %><br />
-    <%= f.text_field :url %>
-  </div>
+
+  <fieldset id="local_repo">
+    <%= f.fields_for :local do |builder| %>
+      <%= render 'local_fields', f: builder %>
+    <% end %>
+  </fieldset>
+
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+  (function() {
+    var local = "<%= escape_javascript(render 'local_fields', f: ActionView::Helpers::FormBuilder.new('repo[local_attributes]', LocalRepo.new, self, {}, proc {}))%>";
+
+    $('#has_local').data('create', local);
+  }).call(this);
+</script>

@@ -1,31 +1,25 @@
 <div class="row-fluid">
-  <div class="span6 offset3" style="background-color: #fff">
-    <h1>Listing repos</h1>
+  <div class="span6 offset3 feature-box">
+    <h3 class="head-title">Create a new svn connection...</h3>
 
-    <table>
-      <tr>
-        <th>Name</th>
-        <th>Protocol</th>
-        <th>Url</th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
+    <%= render 'form' %>
 
-    <% @repos.each do |repo| %>
-      <tr>
-        <td><%= repo.name %></td>
-        <td><%= repo.protocol %></td>
-        <td><%= repo.url %></td>
-        <td><%= link_to 'Show', repo %></td>
-        <td><%= link_to 'Edit', edit_repo_path(repo) %></td>
-        <td><%= link_to 'Destroy', repo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-    </table>
+    <hr class="inset-dark" />
 
-    <br />
+    <div class="row-fluid">
+      <div class="span4 offset4">
+        <div class="dark-list-field">
+          <div class="nice-scroll">
+            <ul>
+            <% @repos.each do |repo| %>
+              <li><%= link_to raw("#{repo.name}<i class='icon-circle-arrow-right'></i>"), repo %></li>
+            <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <%= link_to 'New Repo', new_repo_path %>
+    <h3 class="foot-title">...or use a saved connection</h3>
   </div>
 </div>

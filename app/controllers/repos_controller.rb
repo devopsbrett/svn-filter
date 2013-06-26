@@ -1,5 +1,5 @@
 class ReposController < ApplicationController
-  layout "front", only: [:index]
+  layout "front", only: [:index, :new, :edit]
   # GET /repos
   # GET /repos.json
   def index
@@ -49,7 +49,7 @@ class ReposController < ApplicationController
         format.html { redirect_to @repo, notice: 'Repo was successfully created.' }
         format.json { render json: @repo, status: :created, location: @repo }
       else
-        format.html { render action: "new" }
+        format.html { render action: "new", layout: "front" }
         format.json { render json: @repo.errors, status: :unprocessable_entity }
       end
     end

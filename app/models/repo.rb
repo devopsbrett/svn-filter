@@ -2,7 +2,7 @@ class Repo < ActiveRecord::Base
   has_one :local, class_name: "LocalRepo", inverse_of: :repo
   validates :url, presence: true
   validate :has_valid_protocol
-  validates :name, presence: true, uniqueness: true, format: { with: /^[a-zA-Z0-9]*$/ }
+  validates :name, presence: true, uniqueness: true, format: { with: /^[a-zA-Z0-9_-]*$/ }
   validates_associated :local
   attr_accessible :name, :protocol, :url, :local_attributes
   accepts_nested_attributes_for :local, allow_destroy: true
