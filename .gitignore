@@ -14,4 +14,6 @@
 /log/*.log
 /tmp
 
+/spec/data/not_writable
+
 /config/database.yml
