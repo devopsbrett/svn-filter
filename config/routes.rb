@@ -1,4 +1,11 @@
+require 'sidekiq/web'
+
 SvnFilter::Application.routes.draw do
+  resources :repos
+
+
+  root :to => 'repos#index'
+  mount Sidekiq::Web, at: "/sidekiq"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

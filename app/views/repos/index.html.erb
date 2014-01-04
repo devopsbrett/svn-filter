@@ -1,0 +1,25 @@
+<div class="row-fluid">
+  <div class="span6 offset3 feature-box">
+    <h3 class="head-title">Create a new svn connection...</h3>
+
+    <%= render 'form' %>
+
+    <hr class="inset-dark" />
+
+    <div class="row-fluid">
+      <div class="span4 offset4">
+        <div class="dark-list-field">
+          <div class="nice-scroll">
+            <ul>
+            <% @repos.each do |repo| %>
+              <li><%= link_to raw("#{repo.name}<i class='icon-circle-arrow-right'></i>"), repo %></li>
+            <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="foot-title">...or use a saved connection</h3>
+  </div>
+</div>
